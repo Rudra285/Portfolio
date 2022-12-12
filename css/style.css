@@ -1,5 +1,5 @@
 body{
-    background-color: #000000;
+    background-color: #000;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -9,4 +9,9 @@ h1{
 
 p{
     color: aliceblue;
+}
+
+#home{
+    color: azure;
+    font-size: 20px;
 }
