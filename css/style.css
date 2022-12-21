@@ -21,18 +21,12 @@ a:link{
     text-decoration: none;
 }
 
-#git{
-    width: 2%;
-    margin-right: auto;
-    border-right: 5px black;
-}
-
-#linkin{
-    width: 2%;
-}
-
 .fa-linkedin:hover{
     color: #0A66C2;
+}
+
+.fa-github:hover{
+    color: #F1502F;
 }
 
 .imgbox{
