@@ -23,14 +23,17 @@
         <nav class="navbar fixed-top navbar-expand-sm navbar-dark">
             <div class="container-fluid">
                 <a href="index.html" id="home">Rudra Patel</a>
+                <button class="navbar-toggler dropdown-menu-end remove" id="navbutton" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon remove"></span>
+				</button>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav navbar-right nav-pills me-auto">
-						<li><a class="nav-link" href="https://github.com/Rudra285" target="_blank" style="color: whitesmoke;"><i class="fa fa-github"></i></a></li>
-						<li><a class="nav-link" href="https://www.linkedin.com/in/rudra-patel-1b542b1b5/" target="_blank" style="color: whitesmoke;"><i class="fa fa-linkedin"></i></a></li>
+						<li class="nav-item"><a class="nav-link" href="https://github.com/Rudra285" target="_blank" style="color: whitesmoke;"><i class="fa fa-github"></i></a></li>
+						<li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/rudra-patel-1b542b1b5/" target="_blank" style="color: whitesmoke;"><i class="fa fa-linkedin"></i></a></li>
 					</ul>
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="#about">About</a></li>
-						<li><a class="nav-link" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,12 +41,12 @@
 
         <!--home page-->
         <div class="imgbox" style="position: relative" id="welcome-image-box">
-			<img src="img/niagara.jpg" class="w-image w-100"></img>
+			<img src="img/aurora.gif" class="w-image w-100"></img>
 			<div id="welcome">
-				Hello, my name is Rudra Patel.
+				Welcome, my name is Rudra Patel.<br>I am a Computer Science Undergrad.
 			</div>
 		</div>
-
+        
         <!--about me-->
         <div id="about">
             <div class="container">
@@ -53,10 +56,13 @@
                     </div>
                     <div class="col-2-about">
                         <h3 id="sub-title">About Me</h3>
-                        <p>To be inserted</p>
+                        <p>
+                            Hello, my name is Rudra, I am computer science student at Grant MacEwan University. I am currently looking for work at an entry-level position and I will graduate in June 2023.<br><br>
+                            I am interested in software development and software engineering, building mobile applications, web applications and web development. I am also learning about game development on the side via Unity.
+                        </p>
                         <div class="tab-section">
-                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                            <h5 class="tab-links active-link" onclick="opentab('skills')">Skills</h5>
+                            <h5 class="tab-links" onclick="opentab('education')">Education</h5>
                         </div>
 
                         <!--Skills-->
@@ -177,11 +183,10 @@
                 <h3 id="sub-title">My Projects</h3>
                 <div class="work-list">
                     <div class="work">
-                        <a href="my-garage.html"><img src="img/mygarage.png"></a>
+                        <a href="my-garage.html"><img src="img/mygarage.png" class="project-image"></a>
                     </div>
                 </div>
             </div>
         </div>
-
     </body>
 </html>

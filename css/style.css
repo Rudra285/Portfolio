@@ -2,6 +2,17 @@ body{
     font-family: 'Courier New', Courier, monospace;
     background-color: black;
 }
+.myGarage{
+    font-family: 'Haveltica', Courier, monospace;
+    background-size: cover;
+}
+p{
+    color: #d0d0d0;
+}
+
+li{
+    color: #d0d0d0;
+}
 
 .navbar{
     width: 100%;
@@ -24,9 +35,22 @@ body{
 #welcome{
     position: absolute;
     top: 50%;
+    margin-left: 40px;
     font-size: x-large;
-    color: whitesmoke;
+    color: #d0d0d0;
 }
+
+@media screen and (max-width: 500px) {
+    .welcome {
+      color: #d0d0d0;
+      font-size: large;
+      position: absolute;
+      top: 35%;
+      left: 7%;
+      transform: translate(-5%, -5%);
+    }
+}
+
 a:link{
     text-decoration: none;
 }
@@ -46,7 +70,6 @@ a:link{
 
 #about{
     padding: 80px 0;
-    color: #ababab;
 }
 
 .row{
@@ -68,9 +91,21 @@ a:link{
     flex-basis: 60%;
 }
 
-#sub-title{
+h2{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+h3{
     font-size: 30px;
     font-weight: 400;
+    color: white;
+}
+
+h4{
+    font-size: 20px;
+    font-weight: 200;
     color: white;
 }
 
@@ -81,7 +116,8 @@ a:link{
 
 .tab-links{
     margin-right: 50px;
-    font-size: 18px;
+    font-size: 20px;
+    color: white;
     font-weight: 500;
     cursor: pointer;
     position: relative;
@@ -90,8 +126,8 @@ a:link{
 .tab-links::after{
     content: '';
     width: 0;
-    height: 3px;
-    background: red;
+    height: 1px;
+    background: #b54769;
     position: absolute;
     left: 0;
     bottom: 2px;
@@ -127,18 +163,47 @@ a:link{
 }
 
 .progress-bar#programming-level {
-    background-color: #560062;
+    background-color: #620024;
 }
+
+@media screen and (min-width: 500px) {
+    .remove {
+      display: none;
+      visibility:hidden;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .remove {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    .project-image {
+      height: auto;
+      width: 50%;
+    }
+  }
+  
+  @media only screen and (min-width: 500px) {
+    .navbar .navbar-nav .nav-item .nav-link {
+      padding: 0 0.5em;
+    }
+    .navbar .navbar-nav .nav-item:not(:last-child) .nav-link {
+      border-right: 2px solid #b6b6b6;
+    }
+  }
+  
 
 .ed-info{
     margin-left: -10px;
-    margin-top: -30px;
+    margin-top: -38px;
 }
 
 .ed-info ul li{
     list-style: none;
     margin: 10px -30px;
-    color: #d3d3d3;
 }
 
 .ed-info ul li #institute{
@@ -182,4 +247,22 @@ a:link{
 
 .work:hover img{
     transform: scale(1.1);
+}
+
+.dis-proj{
+    width: 40%;
+}
+
+.cond-item{
+    color: lime;
+}
+
+#ref li{
+    list-style: none;
+    margin: 0 -20px;
+}
+
+#ref li a{
+    color: green;
+    font-weight: bold;
 }

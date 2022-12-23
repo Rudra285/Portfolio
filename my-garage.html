@@ -16,38 +16,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
-    <body>
+    <body class="myGarage" style="background-image: url(img/garage-back.gif);">
         <!--navigation bar-->
         <nav class="navbar fixed-top navbar-expand-sm navbar-dark">
             <div class="container-fluid">
                 <a href="index.html" id="home">Rudra Patel</a>
+                <button class="navbar-toggler dropdown-menu-end remove" id="navbutton" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon remove"></span>
+				</button>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav navbar-right nav-pills me-auto">
-						<li><a class="nav-link" href="https://github.com/Rudra285" target="_blank" style="color: whitesmoke;"><i class="fa fa-github"></i></a></li>
-						<li><a class="nav-link" href="https://www.linkedin.com/in/rudra-patel-1b542b1b5/" target="_blank" style="color: whitesmoke;"><i class="fa fa-linkedin"></i></a></li>
+						<li class="nav-item"><a class="nav-link" href="https://github.com/Rudra285" target="_blank" style="color: whitesmoke;"><i class="fa fa-github"></i></a></li>
+						<li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/rudra-patel-1b542b1b5/" target="_blank" style="color: whitesmoke;"><i class="fa fa-linkedin"></i></a></li>
 					</ul>
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="index.html#about">About</a></li>
-						<li><a class="nav-link active" href="index.html#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+						<li class="nav-item"><a class="nav-link active" href="index.html#projects">Projects</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+        
+        <!--Content-->
         <div>
-            <div>
-                <h2>
-                    My Garage Application
-                </h2>
-
+            <div class="container align-item-center" style="position: relative; margin-top: 70px;">
+                <h2>My Garage Application</h2>
             </div>
+
             <div class="container" style="position: relative;">
                 <div class="row">
-                    <div>
-                        <img src="img/logo.png" class="img-fluid rounded" style="float: left; width: 20%; margin-bottom: 2rem;"></img>
-                        <img src="img/bigchaindb.jpg" class="img-fluid rounded" style="float: left; width: 20%; margin-bottom: 2rem;"></img>
+                    <div class="dis-proj">
+                        <img src="img/logo.png" class="img-fluid" style="float: left; margin-bottom: 2rem;"></img>
+                        <img src="img/bigchaindb.jpg" class="img-fluid rounded" style="float: left; margin-bottom: 2rem;"></img>
                     </div>
-                    <div>
+                    <div class="col-md-6 col-12">
                         <h3>
                             Goal
                         </h3>
@@ -59,6 +61,7 @@
                                 vehicles safer.
                             </p>
                         </div>
+
                         <h3>
                             BigchainDB
                         </h3>
@@ -69,20 +72,20 @@
                                 Throughput for transactions increases linearly with the nodes.
                             </p>
                         </div>
+
                         <h3>
                             Crypto conditions
                         </h3>
                         <div>
-                            <p>
-                                As mentioned above BigchainDB has its own form of smart-contracts known as "crypto conditions". Which include:
+                            <p>As mentioned above BigchainDB has its own form of smart-contracts known as "crypto conditions". Which include:</p>
                                 <ul>
-                                    <li>Threshold Conditions: Allows for multiple owner assets to be signed in a flexible manner. Setts a conditions where if certain amount of signatures are signed, then the asset is realsed and free to be transfer.</li>
-                                    <li>Hashlok Conditions: Similar to passwords, a secret phrase/pre-image is required so the asset can be transfered.</li>
-                                    <li>Timeout Conditions: Essentially puts a timeout on the asset if a condition is not met within the given timeframe, then the asset is lost and can't be transferred by anyone.</li>
+                                    <li><span class="cond-item">Threshold Conditions:</span> Allows for multiple owner assets to be signed in a flexible manner. Setts a conditions where if certain amount of signatures are signed, then the asset is realsed and free to be transfer.</li>
+                                    <li><span class="cond-item">Hashlock Conditions:</span> Similar to passwords, a secret phrase/pre-image is required so the asset can be transfered.</li>
+                                    <li><span class="cond-item">Timeout Conditions:</span> Essentially puts a timeout on the asset if a condition is not met within the given timeframe, then the asset is lost and can't be transferred by anyone.</li>
                                 </ul>
-                                The conditions are all use an Escrow which releases an asset if the given condition is met.
-                            </p>
+                            <p>The conditions are all use an Escrow which releases an asset if the given condition is met.</p>
                         </div>
+
                         <h3>
                             Implementation
                         </h3>
@@ -92,10 +95,11 @@
                                 To build the app we used Python to implememnt the backend and KivyMD for the frontend.
                             </p>
                         </div>
+
                         <h4>
                             Source
                         </h4>
-                        <ul>
+                        <ul id="ref">
                             <li><a href="https://www.bigchaindb.com/" target="_blank">BigChainDB</a></li>
                             <li><a href="https://docs.bigchaindb.com/projects/py-driver/en/latest/index.html" target="_blank">Python Driver</a></li>
                             <li><a href="https://kivymd.readthedocs.io/en/latest/" target="_blank">KivyMD</a></li>
