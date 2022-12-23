@@ -3,7 +3,6 @@ body{
     background-color: black;
 }
 .myGarage{
-    font-family: 'Haveltica', Courier, monospace;
     background-size: cover;
 }
 p{
@@ -38,17 +37,6 @@ li{
     margin-left: 40px;
     font-size: x-large;
     color: #d0d0d0;
-}
-
-@media screen and (max-width: 500px) {
-    .welcome {
-      color: #d0d0d0;
-      font-size: large;
-      position: absolute;
-      top: 35%;
-      left: 7%;
-      transform: translate(-5%, -5%);
-    }
 }
 
 a:link{
@@ -164,37 +152,7 @@ h4{
 
 .progress-bar#programming-level {
     background-color: #620024;
-}
-
-@media screen and (min-width: 500px) {
-    .remove {
-      display: none;
-      visibility:hidden;
-    }
-  }
-  
-  @media screen and (max-width: 500px) {
-    .remove {
-      display: block;
-    }
-  }
-
-  @media screen and (min-width: 500px) {
-    .project-image {
-      height: auto;
-      width: 50%;
-    }
-  }
-  
-  @media only screen and (min-width: 500px) {
-    .navbar .navbar-nav .nav-item .nav-link {
-      padding: 0 0.5em;
-    }
-    .navbar .navbar-nav .nav-item:not(:last-child) .nav-link {
-      border-right: 2px solid #b6b6b6;
-    }
-  }
-  
+}  
 
 .ed-info{
     margin-left: -10px;
