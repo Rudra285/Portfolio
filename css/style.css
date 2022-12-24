@@ -31,6 +31,7 @@ li{
 #home{
     border-right: 2px solid white;
 }
+
 #welcome{
     position: absolute;
     top: 50%;
@@ -152,7 +153,7 @@ h4{
 
 .progress-bar#programming-level {
     background-color: #620024;
-}  
+}
 
 .ed-info{
     margin-left: -10px;
@@ -223,4 +224,37 @@ h4{
 #ref li a{
     color: green;
     font-weight: bold;
+}
+
+@media screen and (max-width: 600px){
+    #welcome{
+        top: 35%;
+        left: 7%;
+        font-size: large;
+        transform: translate(-5%, -5%);
+    }
+    
+    #home:not{
+        border-right: 2px solid white;
+    }
+    
+    .mob{
+        height: auto;
+        width: 50%;
+    }
+    
+    .remove {
+        display: none;
+        visibility:hidden;
+    }
+    
+    .remove {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .navbar .navbar-nav .nav-item .nav-link {
+        padding: 0 0.5em;
+    }
 }
