@@ -1,15 +1,18 @@
 import { useRef, useState, useEffect, type ComponentType } from 'react';
 import myGarageImg from '../assets/mygarage.png';
 import squadImg from '../assets/squad.png';
+import sfssImg from '../assets/sfss.png';
 import bigchainDBImg from '../assets/bigchaindb.jpg';
 import reactExpoImg from '../assets/reactExpo.jpg';
 import garageLogoImg from '../assets/garage_logo.png';
 import squadLogoImg from '../assets/squad_logo.png';
+import sfssLogoImg from '../assets/sfss_logo.png';
 import squadBg from '../assets/squad-back.png';
 import garageBg from '../assets/garage-back.gif';
+import sfssBg from '../assets/sfss-back.png';
 
 /** Add new project ids here when you add a case to PROJECTS. */
-type ProjectId = 'garage' | 'squad' | 'restaurant';
+type ProjectId = 'garage' | 'squad' | 'sfss';
 
 type ProjectDefinition = {
   id: ProjectId;
@@ -172,46 +175,80 @@ function SquadDetail() {
   );
 }
 
-function RestaurantDetail() {
+function SFSSDetail() {
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 mb-4">
-          <img src={squadLogoImg} className="img-fluid mb-3" alt="Squad Logo" />
-          <img src={reactExpoImg} className="img-fluid rounded" alt="React + Expo" />
+          <img src={sfssLogoImg} className="img-fluid mb-3" alt="SFSSLogo" />
+          {/* <img src={reactExpoImg} className="img-fluid rounded" alt="React + Expo" /> */}
         </div>
         <div className="col-md-6">
-          <h3>What is it?</h3>
+          <h3>Description</h3>
           <div>
             <p>
-              This is an academic project I worked on as part of a team. It is a simple application to schedule employees in a restaurant based on available shifts and requirements of the schedules.
+              Developed a local secure client-server file storage and sharing system in Python using socket programming and hybrid cryptography for up to 5 clients. 
+              The hybrid cryptography includes an RSA-based secure key exchange and AES encrypted communication for secure authentication and protected file transfer.
+
+              This project includes 2 versions, a base version and enhanced version.
             </p>
           </div>
 
-          <h3>Application Architecture</h3>
+          <h3>Base Version</h3>
+          <div>
+            <p>
+              On the client side, the client connects to a server, sends over a user credentials to server to validate a authentication sequence using RSA asymmetric server public key.
+              Client recieves an AES symmteric key from the server, after decrypting it with client's private key, it sends an "OK" to confirm successful key exchange, this allows any future 
+              communication to be done with the symmetric key improving the performance of the real-time communication while keeping it secure, after the key exchange the client then recieves 
+              a menu which is displayed to the client for input.
+            </p>
+            <p>
+              The server initializes a TCP socket using IPv4 communication and listens for incoming client connections on a specified port. 
+              It creates JSON metadata files for 5 clients and listens for upto 5 client connections. When a client connects, the server 
+              creates a child process to handle the client independently, allowing the parent server process to continue accepting additional client connections.
+              Once the server recieves the user credentials from the client, it authenticates them by checking the JSON files to see if the user exists,
+              and if the creditentials are correct. Once authenticated, it genrates a AES symmetric key and sends it over with the RSA asymmetric client public key,
+              once the server recieves the "OK" from the client, it sends over the menu option to client.
+            </p>
+          </div>
+
+          <h3>Enhanced Version</h3>
+          <div>
+            <p>
+              In addition to the base implementation, the client only implements a timeout for the connection socket, as the server 
+              is preventing DoS attacks. So anymore than 5 connections, and the server will prevent more client connections. So the 
+              waiting connections will need to timeout so it doesn't hold up the client machine.
+            </p>
+            <p>
+              In addition to the base implementation, the server handles the concurrent clinet connections by implemeting a connection
+              counter, it checks for any finished child processes, and decremnets the count, if a client connects, then it increments the counter.
+              It has a connection limit of 5, if more clients try to connect over the limit it displays a warning and the parent process waits
+              for a child process to terminate. This essentially ensures that DoS mitigation is ensured and the sytem has better security and
+              concurrency management.
+            </p>
+          </div>
+
+          <h3>Menu Features</h3>
           <div>
             <ul>
-              <li>In progress</li>
+              <li>Upload File: The client can securely upload file data to the server based on given file size and update client JSON metadata with file information.</li>
+              <li>Share File: The client can allow access to file the client has to other clients by updating the host client's metadata for the specific file.</li>
+              <li>View Files: The clients can view the files they have access to, the server sends the information of files the client requests, like file name, owner, upload time, size.</li>
+              <li>Download File: The client can request to downlaod a file, the server will check if the client has access to that file via the JSON metadata and end the file to the client.</li>
             </ul>
           </div>
 
-          <h3>Tech Stack</h3>
+          <h3>Concepts Implemented</h3>
           <div>
             <ul>
-              <li><span>Database:</span> SQLite</li>
-              <li><span>Language:</span> Java</li>
-              <li><span>IDE:</span> Android Studio</li>
-              <li><span>Supported Platforms:</span> Android </li>
+              <li>Socket Programming</li>
+              <li>Client-Server Architecture</li>
+              <li>Hybrid Cryptography</li>
+              <li>JSON metadata storage</li>
+              <li>Concurrent Processing</li>
+              <li>Network Security</li>
             </ul>
           </div>
-
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://react.dev/" target="_blank" rel="noreferrer">React</a></li>
-            <li><a href="https://expo.dev/" target="_blank" rel="noreferrer">Expo</a></li>
-            <li><a href="https://supabase.com/" target="_blank" rel="noreferrer">Supabase</a></li>
-            <li style={{ fontWeight: 'bold' }}>* Github repository link cannot be shared publically due to academic restrictions, however I can provide the link upon request</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -238,17 +275,17 @@ const PROJECTS: ProjectDefinition[] = [
     thumbnailSrc: squadImg,
     thumbnailAlt: 'Squad',
     background: squadBg,
-    thumbnailHoverClass: 'garage-hover',
+    thumbnailHoverClass: 'squad-hover',
     Detail: SquadDetail,
   },
   {
-    id: 'restaurant',
-    overlayTitle: 'My Restaurant',
-    thumbnailSrc: squadImg,
-    thumbnailAlt: 'My Restaurant',
-    background: garageBg,
-    thumbnailHoverClass: 'restaurant-hover',
-    Detail: RestaurantDetail,
+    id: 'sfss',
+    overlayTitle: 'Secure File Storage System',
+    thumbnailSrc: sfssImg,
+    thumbnailAlt: 'SFSS',
+    background: sfssBg,
+    thumbnailHoverClass: 'sfss-hover',
+    Detail: SFSSDetail,
   },
 ];
 
