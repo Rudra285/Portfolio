@@ -3,9 +3,11 @@ import DetailDialog from "./DetailDialog";
 import myGarageImg from "../assets/mygarage.png";
 import squadImg from "../assets/squad.png";
 import sfssImg from "../assets/sfss.png";
+import budgetTrackerImg from "../assets/bt.png";
 import garageLogoImg from "../assets/garage_logo.png";
 import squadLogoImg from "../assets/squad_logo.png";
 import sfssLogoImg from "../assets/sfss_logo.png";
+import budgetTrackerLogoImg from "../assets/bt_logo.png";
 
 function GarageDetail() {
   return (
@@ -345,6 +347,90 @@ function SFSSDetail() {
   );
 }
 
+function BudgetTrackerDetail() {
+  return (
+    <div className="project-dialog-body">
+      <h3>Overview</h3>
+      <div>
+        <p>
+          Budget Tracker is a native desktop application for recording personal
+          income and expenses. It keeps each transaction in a local SQLite
+          database and builds monthly Excel workbooks with category sheets,
+          totals, and a summary of income, expenses, and net income.
+        </p>
+      </div>
+
+      <h3>Tracking Workflow</h3>
+      <div>
+        <p>
+          The PyQt6 interface uses exclusive, animated panels for Expenses,
+          Income, and Reports. Expense entries capture a category, product,
+          amount, date, payment source, and—when relevant—the selected bank or
+          credit card. Income entries include a name, amount, source, optional
+          details, date, and destination bank account.
+        </p>
+      </div>
+
+      <h3>Data and Validation</h3>
+      <div>
+        <ul>
+          <li>
+            <span>Local Storage:</span> Transactions are persisted in SQLite and
+            exported into a workbook for the corresponding month.
+          </li>
+          <li>
+            <span>Organized Workbooks:</span> Expense entries are grouped into
+            category sheets, while income and overall totals remain separate.
+          </li>
+          <li>
+            <span>Context-Aware Inputs:</span> Bank selection is required for
+            Debit or Savings expenses, and the credit-card field unlocks only
+            when Credit Card is selected.
+          </li>
+          <li>
+            <span>Safe Updates:</span> Existing databases and workbook sheets are
+            migrated as fields are added, preserving previously entered data.
+          </li>
+          <li>
+            <span>Input Validation:</span> Required values, report date ranges,
+            and empty report results are checked before files are written.
+          </li>
+        </ul>
+      </div>
+
+      <h3>PDF Reporting</h3>
+      <div>
+        <p>
+          The reporting panel generates detailed PDF summaries directly from
+          the database. Reports can cover a month, a year, a category and date
+          range, a bank account, a credit card, or a general date range. Each
+          report includes summary totals and the matching transaction details,
+          and prevents generation when no records exist for the selection.
+        </p>
+      </div>
+
+      <h3>Tech Stack</h3>
+      <div>
+        <ul>
+          <li>
+            <span>Language:</span> Python
+          </li>
+          <li>
+            <span>Desktop Framework:</span> PyQt6
+          </li>
+          <li>
+            <span>Storage:</span> SQLite and Excel workbooks
+          </li>
+          <li>
+            <span>Distribution:</span> PyInstaller application bundles for macOS
+            and Windows
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 /**
  * Single source of truth for project tiles + overlay routing.
  * To add a project: extend ProjectId, add a Detail component, append one object here.
@@ -380,6 +466,17 @@ const projects = [
     logo: sfssLogoImg,
     Detail: SFSSDetail,
     className: "secure",
+  },
+  {
+    name: "Budget Tracker",
+    type: "04 / PERSONAL FINANCE",
+    description: "Every dollar, accounted for.",
+    stack: "Python · PyQt6 · SQLite / Excel",
+    image: budgetTrackerImg,
+    logo: budgetTrackerLogoImg,
+    Detail: BudgetTrackerDetail,
+    className: "budget",
+    status: "In development",
   },
 ];
 

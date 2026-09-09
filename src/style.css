@@ -360,11 +360,17 @@
 .project-card:hover img {
   transform: scale(1.04) rotate(-1deg);
 }
+.garage .project-art {
+  background: radial-gradient(ellipse at center, #183020, #050c07);
+}
 .squad .project-art {
   background: radial-gradient(ellipse at center, #303255, #171824);
 }
 .secure .project-art {
   background: radial-gradient(ellipse at center, #233b58, #0e1825);
+}
+.budget .project-art {
+  background: radial-gradient(ellipse at center, #174f32, #07140d);
 }
 .art-cross {
   position: absolute;
@@ -1309,10 +1315,10 @@
 
 /* Project studies inherit the visual language of their product logo. */
 .project-dialog {
-  --project-accent: #65c978;
-  --project-header: #174f27;
-  --project-surface: #0b160f;
-  --project-copy: #d7e6d9;
+  --project-accent: #4fae62;
+  --project-header: #0b2f16;
+  --project-surface: #040b06;
+  --project-copy: #cfddd2;
   background: var(--project-surface);
   border-color: var(--project-accent);
 }
@@ -1327,6 +1333,12 @@
   --project-header: #123f6c;
   --project-surface: #091725;
   --project-copy: #d6e7f3;
+}
+.project-dialog--budget {
+  --project-accent: #36ed6f;
+  --project-header: #0b4b27;
+  --project-surface: #06140c;
+  --project-copy: #d9ecdf;
 }
 .project-dialog .dialog-header {
   background: var(--project-header);
@@ -1381,6 +1393,7 @@
 }
 .project-dialog .dialog-content span {
   font-weight: 700;
+  color: var(--project-accent);
 }
 @media (max-width: 700px) {
   .project-dialog .dialog-title-group {
