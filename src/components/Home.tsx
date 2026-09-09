@@ -1,61 +1,9 @@
-import aurora from '../assets/aurora.gif';
-import profile from '../assets/profile.jpg';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-
-const Home = () => {
-  return (
-    <section
-      id="home"
-      className="home-hero"
-      style={{ backgroundImage: `url(${aurora})` }}
-    >
-      <div className="home-hero__content">
-        <p className="home-hero__eyebrow">Software Engineer</p>
-        <h1 className="home-hero__title">Rudra Patel</h1>
-        <p className="home-hero__subtitle">
-          I build creative, reliable software solutions to complex problems
-          with a focus on performance, safety, and real-world impact.
-        </p>
-
-        <div className="home-hero__actions">
-          <a href="#projects" className="btn-primary">
-            My Projects
-          </a>
-          <a href="#about" className="btn-ghost">
-            My Background
-          </a>
-        </div>
-
-        <div className="home-hero__socials">
-          <a
-            href="https://github.com/Rudra285"
-            target="_blank"
-            rel="noreferrer"
-            className="icon-link github"
-            aria-label="GitHub"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://linkedin.com/in/rudra-patel-1b542b1b5"
-            target="_blank"
-            rel="noreferrer"
-            className="icon-link linkedin"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedin />
-          </a>
-        </div>
-      </div>
-
-      <div className="home-hero__media">
-        <div className="profile-card">
-          <img src={profile} alt="Profile" className="profile-card__img" />
-          <span className="profile-card__glow" aria-hidden="true" />
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Home;
+import profile from '../assets/profile.JPG?url';
+export default function Home() {
+  return <section id="home" className="hero">
+    <div className="hero-topline"><span className="eyebrow"><span className="status-dot" /> SOFTWARE ENGINEER</span><span className="eyebrow hero-edition">PERSONAL PORTFOLIO / R. PATEL</span></div>
+    <div className="hero-heading"><h1>Rudra<span>Patel<span className="title-period">.</span></span></h1><div className="hero-intro"><span className="intro-mark" aria-hidden="true">↳</span><p>I build software <br />that holds up <br /><em>in the real world.</em></p><a className="primary-link" href="#projects">Explore projects <span aria-hidden="true">↗</span></a></div></div>
+    <div className="hero-bottom"><div className="engineering-plate" aria-hidden="true"><div className="plate-label">SYSTEMS THINKING, FROM THE GROUND UP</div><svg viewBox="0 0 700 220" fill="none"><g stroke="currentColor" strokeWidth="1"><path d="M45 150 240 45 445 150 250 255ZM145 100 340 -5 545 100 350 205ZM245 50 440 -55 645 50 450 155"/><path d="M45 120 240 15 445 120 250 225ZM145 70 340 -35 545 70 350 175ZM245 20 440 -85 645 20 450 125"/><path d="M45 120v30m400-30v30m-195 75v30m-105-185v30m400-30v30m-195 75v30"/><circle cx="345" cy="116" r="47"/><circle cx="345" cy="116" r="65" strokeDasharray="3 7"/><path d="M345 30v172M260 116h170"/></g><circle cx="345" cy="116" r="5" fill="currentColor"/></svg><div className="plate-footer"><span>FIRMWARE → SYSTEMS → APPLICATIONS</span><span>FIG. 001</span></div></div><div className="profile-note"><img src={profile} alt="Rudra Patel at a mountain lake" /><div><span className="eyebrow">BEHIND THE CODE</span><p>Curious by nature. <br />Engineer by practice.</p><a href="#about">My background ↗</a></div></div></div>
+    <div className="hero-footnote"><span>PERFORMANCE. SAFETY. REAL-WORLD IMPACT.</span><span>SCROLL TO EXPLORE ↓</span></div>
+  </section>;
+}

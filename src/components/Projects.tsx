@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect, type ComponentType } from 'react';
+import { useState } from 'react';
+import DetailDialog from './DetailDialog';
 import myGarageImg from '../assets/mygarage.png';
 import squadImg from '../assets/squad.png';
 import sfssImg from '../assets/sfss.png';
@@ -7,45 +8,7 @@ import reactExpoImg from '../assets/reactExpo.jpg';
 import garageLogoImg from '../assets/garage_logo.png';
 import squadLogoImg from '../assets/squad_logo.png';
 import sfssLogoImg from '../assets/sfss_logo.png';
-import squadBg from '../assets/squad-back.png';
-import garageBg from '../assets/garage-back.gif';
-import sfssBg from '../assets/sfss-back.png';
 
-/** Add new project ids here when you add a case to PROJECTS. */
-type ProjectId = 'garage' | 'squad' | 'sfss';
-
-type ProjectDefinition = {
-  id: ProjectId;
-  /** Shown in the overlay header */
-  overlayTitle: string;
-  thumbnailSrc: string;
-  thumbnailAlt: string;
-  /** Full-screen overlay background (CSS url(...) value is built from this import) */
-  background: string;
-  thumbnailHoverClass?: string;
-  Detail: ComponentType;
-};
-
-const thumbWrapperStyle: React.CSSProperties = {
-  width: '400px',
-  height: '200px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  overflow: 'hidden',
-  borderRadius: '16px',
-  padding: '1rem',
-  margin: '0 auto',
-  transition: 'transform 0.3s ease-in-out',
-};
-
-const thumbImgStyle: React.CSSProperties = {
-  maxWidth: '400px',
-  maxHeight: '1100px',
-  cursor: 'pointer',
-  transition: 'transform 0.3s ease-in-out',
-  objectFit: 'contain',
-};
 
 function GarageDetail() {
   return (
@@ -259,210 +222,21 @@ function SFSSDetail() {
  * Single source of truth for project tiles + overlay routing.
  * To add a project: extend ProjectId, add a Detail component, append one object here.
  */
-const PROJECTS: ProjectDefinition[] = [
-  {
-    id: 'garage',
-    overlayTitle: 'My Garage Application',
-    thumbnailSrc: myGarageImg,
-    thumbnailAlt: 'My Garage',
-    background: garageBg,
-    thumbnailHoverClass: 'garage-hover',
-    Detail: GarageDetail,
-  },
-  {
-    id: 'squad',
-    overlayTitle: 'Squad',
-    thumbnailSrc: squadImg,
-    thumbnailAlt: 'Squad',
-    background: squadBg,
-    thumbnailHoverClass: 'squad-hover',
-    Detail: SquadDetail,
-  },
-  {
-    id: 'sfss',
-    overlayTitle: 'Secure File Storage System',
-    thumbnailSrc: sfssImg,
-    thumbnailAlt: 'SFSS',
-    background: sfssBg,
-    thumbnailHoverClass: 'sfss-hover',
-    Detail: SFSSDetail,
-  },
+const projects = [
+  { name: 'My Garage', type: '01 / DISTRIBUTED SYSTEMS', description: 'A vehicle’s history. A ledger you can trust.', stack: 'Python · BigchainDB · KivyMD', image: myGarageImg, Detail: GarageDetail, className: 'garage' },
+  { name: 'Squad', type: '02 / MOBILE APPLICATION', description: 'Keeping close, even from a distance.', stack: 'React Native · TypeScript · Supabase', image: squadImg, Detail: SquadDetail, className: 'squad', status: 'In development' },
+  { name: 'Secure File Storage', type: '03 / NETWORK SECURITY', description: 'Private by design. Secure in transit.', stack: 'Python · RSA / AES · TCP sockets', image: sfssImg, Detail: SFSSDetail, className: 'secure' },
 ];
 
-const Project = () => {
-  const [showOverlay, setShowOverlay] = useState(false);
-  const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties | null>(null);
-  const thumbRefs = useRef<Partial<Record<ProjectId, HTMLImageElement | null>>>({});
-  const originalRect = useRef<DOMRect | null>(null);
-  const [activeProject, setActiveProject] = useState<ProjectId | null>(null);
-
-  const activeDefinition = activeProject
-    ? PROJECTS.find((p) => p.id === activeProject) ?? null
-    : null;
-
-  useEffect(() => {
-    if (showOverlay) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'auto';
-    };
-  }, [showOverlay]);
-
-  const setThumbRef = (id: ProjectId) => (el: HTMLImageElement | null) => {
-    thumbRefs.current[id] = el;
-  };
-
-  const openProject = (id: ProjectId) => {
-    const project = PROJECTS.find((p) => p.id === id);
-    const el = thumbRefs.current[id];
-    if (!project || !el) return;
-
-    const rect = el.getBoundingClientRect();
-    originalRect.current = rect;
-
-    setActiveProject(id);
-    setOverlayStyle({
-      top: rect.top,
-      left: rect.left,
-      width: rect.width,
-      height: rect.height,
-      position: 'fixed',
-      backgroundImage: `url(${project.background})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      color: '#fff',
-      zIndex: 9999,
-      overflow: 'hidden',
-      transition: 'all 0.5s ease-in-out',
-    });
-
-    setShowOverlay(true);
-
-    requestAnimationFrame(() => {
-      setOverlayStyle((prev) =>
-        prev
-          ? {
-              ...prev,
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-            }
-          : prev,
-      );
-    });
-  };
-
-  const handleClose = () => {
-    if (!originalRect.current) return;
-
-    setOverlayStyle((prev) =>
-      prev
-        ? {
-            ...prev,
-            top: originalRect.current!.top,
-            left: originalRect.current!.left,
-            width: originalRect.current!.width,
-            height: originalRect.current!.height,
-          }
-        : prev,
-    );
-
-    setTimeout(() => {
-      setShowOverlay(false);
-      setActiveProject(null);
-    }, 500);
-  };
-
-  const Detail = activeDefinition?.Detail;
-
-  return (
-    <section
-      id="projects"
-      className="py-5 text-white"
-      style={{ width: '100%', paddingLeft: '0', paddingRight: '0', margin: '0', backgroundColor: '#001317' }}
-    >
-      <h3 className="mb-5 text-center" style={{ fontWeight: 'bold' }}>My Projects</h3>
-
-      <div
-        className="container mb-5"
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        {PROJECTS.map((project) => (
-          <div key={project.id} className="container d-flex flex-column align-items-center">
-            <div style={thumbWrapperStyle} onClick={() => openProject(project.id)} role="presentation">
-              <img
-                ref={setThumbRef(project.id)}
-                src={project.thumbnailSrc}
-                alt={project.thumbnailAlt}
-                className={`img-fluid ${project.thumbnailHoverClass ?? ''}`.trim()}
-                style={thumbImgStyle}
-              />
-            </div>
-            <p style={{ fontSize: '0.75rem', color: '#bbb', marginTop: '0.5rem' }}>Click to expand</p>
-          </div>
-        ))}
-
-        {showOverlay && overlayStyle && activeDefinition && Detail && (
-          <div style={overlayStyle}>
-            <div
-              className="d-flex justify-content-between align-items-center"
-              style={{
-                padding: '1rem',
-                position: 'sticky',
-                top: 0,
-                zIndex: 10001,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              <h2>{activeDefinition.overlayTitle}</h2>
-              <button
-                type="button"
-                onClick={handleClose}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '2.5rem',
-                  color: 'white',
-                  textShadow: '0 0 5px black',
-                  cursor: 'pointer',
-                  zIndex: 10002,
-                }}
-                aria-label="Close project"
-              >
-                &times;
-              </button>
-            </div>
-
-            <div
-              style={{
-                height: 'calc(100% - 80px)',
-                overflowY: 'auto',
-                padding: '2rem',
-                paddingBottom: '5rem',
-                color: 'white',
-              }}
-            >
-              <Detail />
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-};
-
-export default Project;
+export default function Projects() {
+  const [active, setActive] = useState<number | null>(null);
+  const selected = active === null ? null : projects[active];
+  return <section id="projects" className="section projects-section">
+    <div className="section-heading"><span className="eyebrow">02 — SELECTED PROJECTS</span><h2>Ideas, made<br /><em>operational.</em></h2><p>From distributed ledgers to everyday connections. A selection of systems I’ve built.</p></div>
+    <div className="project-list">{projects.map((project, index) => <button className={`project-card ${project.className}`} key={project.name} onClick={() => setActive(index)} aria-label={`Explore ${project.name}`}>
+      <div className="project-copy"><span className="eyebrow">{project.type}</span><div><h3>{project.name}</h3><p>{project.description}</p></div><div className="project-bottom"><span>{project.stack}</span><span className="round-arrow" aria-hidden="true">↗</span></div></div>
+      <div className="project-art"><div className="art-cross cross-one" aria-hidden="true">+</div><img src={project.image} alt="" loading="lazy" />{project.status && <span className="project-status">{project.status}</span>}<span className="art-caption">VIEW PROJECT STUDY ↗</span></div>
+    </button>)}</div>
+    {selected && <DetailDialog title={selected.name} onClose={() => setActive(null)}><selected.Detail /></DetailDialog>}
+  </section>;
+}
