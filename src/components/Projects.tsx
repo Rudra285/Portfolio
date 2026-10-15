@@ -8,6 +8,8 @@ import garageLogoImg from "../assets/garage_logo.png";
 import squadLogoImg from "../assets/squad_logo.png";
 import sfssLogoImg from "../assets/sfss_logo.png";
 import budgetTrackerLogoImg from "../assets/bt_logo.png";
+import linkUpLogoImg from "../assets/linkup_icon.png";
+import linkUpImg from "../assets/linkup.png";
 
 function GarageDetail() {
   return (
@@ -431,10 +433,80 @@ function BudgetTrackerDetail() {
   );
 }
 
-/**
- * Single source of truth for project tiles + overlay routing.
- * To add a project: extend ProjectId, add a Detail component, append one object here.
- */
+function LinkUpDetail() {
+  return (
+    <div className="project-dialog-body">
+      <h3>Concept</h3>
+      <p>
+        Link Up is a voice-based word association party game for 2–12 players.
+        One phone sits in the middle of the table as host and referee. Players
+        take turns saying a word linked to the previous one before time runs
+        out. Repeats, banned words, missed turns, and rejected links cost a life;
+        the last player standing wins.
+      </p>
+      <p>The application is in active development.</p>
+
+      <h3>Gameplay</h3>
+      <ul>
+        <li>
+          <span>Voice-Driven Turns:</span> Continuous speech recognition captures
+          answers while spoken announcements, sound effects, and haptics guide
+          play without requiring players to watch the screen.
+        </li>
+        <li>
+          <span>On-Device Referee:</span> Apple Foundation Models evaluates word
+          associations in the background while the next player answers. Verdicts
+          are applied in submission order to keep the game consistent.
+        </li>
+        <li>
+          <span>Group Decisions:</span> HALT pauses the timer and microphone so
+          players can review the chain and overrule a verdict. Uncertain AI
+          decisions also pause play for the group to decide.
+        </li>
+        <li>
+          <span>House Rules:</span> Overrides are saved locally and reused for
+          matching word pairs. Previous rulings also provide context for future
+          AI judgments, without retraining the model.
+        </li>
+        <li>
+          <span>Flexible Play:</span> Classic, Party, Hardcore, and Family presets
+          customize timing and judging. Settings include lives, word packs,
+          repeat detection, and multilingual or two-language games.
+        </li>
+      </ul>
+
+      <h3>Architecture</h3>
+      <p>
+        A pure TypeScript state machine handles game rules independently of
+        React, audio, and AI. A controller coordinates the clock, speech listener,
+        judge, and host voice, then exposes game snapshots to the interface.
+        Generation tokens discard stale judge results and announcements after
+        play moves on. A local Swift Expo module connects the app to Apple’s
+        Foundation Models framework.
+      </p>
+
+      <h3>Privacy and Compatibility</h3>
+      <p>
+        Settings, players, presets, and house rules stay in local SQLite storage.
+        The app has no accounts, ads, analytics, or backend servers. AI judging
+        requires a compatible iPhone with Apple Intelligence enabled and iOS 26
+        or later. When the model is unavailable, words are accepted and the group
+        can resolve disputes using HALT.
+      </p>
+
+      <h3>Tech Stack</h3>
+      <ul>
+        <li><span>App:</span> React Native, Expo SDK 54, TypeScript, Expo Router</li>
+        <li><span>AI:</span> Apple Foundation Models through a native Swift module</li>
+        <li><span>Voice and Audio:</span> expo-speech-recognition, expo-speech, expo-audio</li>
+        <li><span>Storage:</span> expo-sqlite</li>
+        <li><span>Testing and Builds:</span> Jest, jest-expo, EAS Build and Submit</li>
+      </ul>
+    </div>
+  );
+}
+
+/** Single source of truth for project tiles and detail dialogs. */
 const projects = [
   {
     name: "My Garage",
@@ -476,6 +548,17 @@ const projects = [
     logo: budgetTrackerLogoImg,
     Detail: BudgetTrackerDetail,
     className: "budget",
+    status: "In development",
+  },
+  {
+    name: "Link Up",
+    type: "05 / VOICE PARTY GAME",
+    description: "One phone. Every voice. A chain of connections.",
+    stack: "React Native · TypeScript · Swift · Apple Intelligence",
+    image: linkUpImg,
+    logo: linkUpLogoImg,
+    Detail: LinkUpDetail,
+    className: "linkup",
     status: "In development",
   },
 ];

@@ -372,6 +372,9 @@
 .budget .project-art {
   background: radial-gradient(ellipse at center, #174f32, #07140d);
 }
+.linkup .project-art {
+  background: radial-gradient(ellipse at center, #303c70, #19152e);
+}
 .art-cross {
   position: absolute;
   top: 12px;
@@ -1339,6 +1342,18 @@
   --project-header: #0b4b27;
   --project-surface: #06140c;
   --project-copy: #d9ecdf;
+}
+.project-dialog--linkup {
+  --project-accent: #88a8ff;
+  --project-header: #252049;
+  --project-surface: #141124;
+  --project-copy: #e1e5f5;
+}
+.project-dialog--linkup .project-dialog-logo {
+  transform: scale(1.6);
+}
+.project-dialog--linkup .dialog-close {
+  border-color: #ffda45;
 }
 .project-dialog .dialog-header {
   background: var(--project-header);
